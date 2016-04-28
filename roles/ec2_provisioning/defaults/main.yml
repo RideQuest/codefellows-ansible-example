@@ -1,11 +1,11 @@
-keypair: fblcR7F0s
-security_group: vpc-ssh-access
+keypair: fb*lcR7F%*0s
+security_group: launch-wizard-1
 instance_type: t2.micro
 ami: ami-29ebb519
-vpc_subnet_id: subnet-29b9a46f
+vpc_subnet_id: subnet-29b44b5f
 region: us-west-2
 instance_tags: {"Name": "ansible-built"}
 root_ebs_size: 8
 zone: us-west-2a
-instance_profile_name: mypoweruser
+instance_profile_name: Jared
 num_instances: 1

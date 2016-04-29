@@ -6,10 +6,13 @@ stop on runlevel [016]
 respawn
 setuid www-data
 setgid www-data
-chdir {{ django_home }}
+chdir {{ django_home }}/imagersite
 env DJANGO_SETTINGS_MODULE=imagersite.production
 env DATABASE_URL={{ db_url }}
-exec gunicorn -b 127.0.0.1:8000 -w 4 --log-file /tmp/imagersite.log --error-logfile /tmp/imagersite_error.log --access-lo$ess-logfile /tmp/imagersite_access.log imagersite.wsgi
-
-
-
+env EMAIL_HOST={{ email_host }}
+env EMAIL_USE_TLS={{ email_use_tls }}
+env EMAIL_PORT={{ email_port }}
+env EMAIL_HOST_USER={{ email_host_user }}
+env EMAIL_HOST_PASSWORD={{ email_host_password }}
+env DEFAULT_EMAIL_FROM={{ default_email_from }}
+exec gunicorn -b 127.0.0.1:8000 -w 4 imagersite.wsgi

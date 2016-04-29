@@ -12,6 +12,15 @@
     - python-pip
     - python-psycopg2
     - git
+    - libtiff5-dev 
+    - libjpeg8-dev 
+    - zlib1g-dev
+    - libfreetype6-dev 
+    - liblcms2-dev 
+    - libwebp-dev 
+    - tcl8.6-dev 
+    - tk8.6-dev 
+    - python-tk
 
 - name: Clone Django Repository
   git: repo=https://github.com/jaredscarr/django-imager.git dest={{ django_home }} force=yes
@@ -52,4 +61,4 @@
 
 - name: Make Media Directory
   sudo: yes
-  file: path={{ django_home }}/imager/media state=directory mode=0775 group=www-data
+  file: path={{ django_home }}/imagersite/media state=directory mode=0775 group=www-data

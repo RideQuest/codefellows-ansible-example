@@ -1,2 +1,2 @@
-django_home: /home/ubuntu/checkout
-rds_db_instance: uwpce
+django_home: /home/ubuntu/rideshare-backend
+rds_db_instance: rideshare

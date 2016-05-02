@@ -1,5 +1,8 @@
 ---
 
+- name: Get DB Password
+  include_vars: secrets.yml
+
 - name: Install System Packages
   apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
   sudo: yes
@@ -13,18 +16,23 @@
     - python-psycopg2
     - git
 
-- name: Install UbuntiGis PPA
+- name: Install UbuntuGis PPA
   apt_repository: repo="ppa:ubuntugis/ppa"
   sudo: yes
 
 - name: Install PostGis
   apt: name=postgis state=present update_cache=yes cache_valid_time=3600
+  sudo: yes
 
 - name: Install PostGis Extension
-  - postgresql_ext: name=postgis db=rideshare
+  postgresql_ext: name=postgis db=rideshare login_host=rideshare.cpklkuhcfy5d.us-west-2.rds.amazonaws.com port=5432 login_user=rideshare login_password={{ db_password }}
+  sudo: yes
+# make the connection to the RDS and then run psql command to instantiate a spatialref table
+# sudo -u postgres psql --host=rideshare.cpklkuhcfy5d.us-west-2.rds.amazonaws.com --port=5432 --username=rideshare --password --dbname=rideshare
+# CREATE EXTENSION postgis;
 
 - name: Clone Django Repository
-  git: repo=https://github.com/RideQuest/rideshare-backend.git dest={{ django_home }} force=yes version=jared
+  git: repo=https://github.com/RideQuest/rideshare-backend.git dest={{ django_home }} force=yes version=geo
 
 - name: Install Python Dependencies
   sudo: yes
@@ -35,9 +43,6 @@
 - name: Get DB Hostvars
   set_fact:
     db_host: "{{ hostvars[groups[rds_db_instance][0]] }}"
-
-- name: Get DB Password
-  include_vars: secrets.yml
 
 
 - name: Set DB URL

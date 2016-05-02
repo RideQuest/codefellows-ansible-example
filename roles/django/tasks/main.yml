@@ -13,8 +13,18 @@
     - python-psycopg2
     - git
 
+- name: Install UbuntiGis PPA
+  apt_repository: repo="ppa:ubuntugis/ppa"
+  sudo: yes
+
+- name: Install PostGis
+  apt: name=postgis state=present update_cache=yes cache_valid_time=3600
+
+- name: Install PostGis Extension
+  - postgresql_ext: name=postgis db=rideshare
+
 - name: Clone Django Repository
-  git: repo=https://github.com/RideQuest/rideshare-backend.git dest={{ django_home }} force=yes version=basic
+  git: repo=https://github.com/RideQuest/rideshare-backend.git dest={{ django_home }} force=yes version=jared
 
 - name: Install Python Dependencies
   sudo: yes

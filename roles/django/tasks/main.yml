@@ -32,7 +32,7 @@
 # CREATE EXTENSION postgis;
 
 - name: Clone Django Repository
-  git: repo=https://github.com/RideQuest/rideshare-backend.git dest={{ django_home }} force=yes version=geo
+  git: repo=https://github.com/RideQuest/rideshare-backend.git dest={{ django_home }} force=yes version=dev
 
 - name: Install Python Dependencies
   sudo: yes

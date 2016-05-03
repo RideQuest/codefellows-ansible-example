@@ -2,7 +2,7 @@ keypair: fb*lcR7F%*0s
 security_group: launch-wizard-1
 instance_type: t2.micro
 ami: ami-29ebb519
-vpc_subnet_id: subnet-29b44b5f
+vpc_subnet_id: subnet-b3efe6ea
 region: us-west-2
 instance_tags: {"Name": "rideshare"}
 root_ebs_size: 8

@@ -57,10 +57,10 @@
     settings: rideshare.production
     command: migrate
 
-# - name: Collect Static Files
-#   environment:
-#     DATABASE_URL: "{{ db_url }}"
-#   django_manage:
-#     app_path: "{{ django_home }}"
-#     settings: mysite.production
-#     command: collectstatic
+- name: Collect Static Files
+  environment:
+    DATABASE_URL: "{{ db_url }}"
+  django_manage:
+    app_path: "{{ django_home }}/rideshare/"
+    settings: rideshare.production
+    command: collectstatic
